@@ -3,7 +3,7 @@
 # Ensure gopass is installed and configured to retrieve the API key
 # Usage: ./create-pod.sh
 
-create_gpu_pod_api() {
+create_cpu_pod_api() {
 
     curl --request POST \
     --url https://rest.runpod.io/v1/pods \
@@ -74,5 +74,5 @@ create_gpu_pod_api() {
 # Check if the script is being run directly (not sourced)
 if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
   set -euo pipefail
-  create_gpu_pod_api "$@"
+  create_cpu_pod_api "$@"
 fi
