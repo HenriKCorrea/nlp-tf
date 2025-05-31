@@ -33,15 +33,19 @@ delete_pod_api() {
 
   # Iterate over each pod ID provided as argument
   for pod_id in "$@"; do
-  # Execute the delete command
-  "${delete_cmd[@]}" --url "$url/$pod_id"
+    # Execute the delete command
+    if "${delete_cmd[@]}" --url "$url/$pod_id"; then
+      echo "Deleted pod $pod_id" 1>&2
+    fi
   done
 
   # Iterate over each pod ID from stdin (if file descriptor is used)
   if [[ ! -t 0 ]]; then
     while IFS= read -r pod_id; do
       # Execute the delete command
-      "${delete_cmd[@]}" --url "$url/$pod_id"
+      if "${delete_cmd[@]}" --url "$url/$pod_id"; then
+        echo "Deleted pod $pod_id" 1>&2
+      fi
     done
   fi
 }
