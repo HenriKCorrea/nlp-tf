@@ -1,7 +1,6 @@
 #!/bin/bash
-# This script creates a new RunPod pod with the specified configuration.
+# This script creates a new CPU pod with the specified configuration.
 # Ensure gopass is installed and configured to retrieve the API key
-# Usage: ./create-pod.sh
 
 create_cpu_pod_api() {
 
