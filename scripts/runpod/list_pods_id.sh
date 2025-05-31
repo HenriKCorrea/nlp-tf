@@ -1,4 +1,5 @@
 #!/bin/bash
+# See https://docs.runpod.io/api-reference/pods/GET/pods
 
 list_pods_id_api() {
 

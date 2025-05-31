@@ -1,6 +1,7 @@
 #!/bin/bash
 # This script creates a new GPU pod with the specified configuration.
 # Ensure gopass is installed and configured to retrieve the API key
+# See https://docs.runpod.io/api-reference/pods/POST/pods
 
 create_gpu_pod_api() {
     request_cmd=("curl" "--request" "POST")

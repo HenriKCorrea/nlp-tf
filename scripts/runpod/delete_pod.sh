@@ -24,6 +24,8 @@
 # Exit Codes:
 #   0  Success
 #   1  Failure
+#
+# See https://docs.runpod.io/api-reference/pods/DELETE/pods
 
 delete_pod_api() {
   url="https://rest.runpod.io/v1/pods"
