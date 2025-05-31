@@ -71,6 +71,12 @@ create_gpu_pod_api() {
     "volumeInGb": 20,
     "volumeMountPath": "/workspace"
     }'
+
+    # Add jupyterlab password to environment variables from gopass (if available)
+    if jupyter_password="$(gopass show -o cloud/runpod/jupyter)"; then
+        payload=$(echo "$payload" | jq --arg password "$jupyter_password" '.env["JUPYTER_PASSWORD"] = $password')
+    fi
+
     request_cmd+=("--data" "$payload")
 
     # Execute the request
