@@ -15,8 +15,6 @@ create_gpu_pod_api() {
     "computeType": "GPU",
     "containerDiskInGb": 500,
     "countryCodes": [],
-    "cpuFlavorIds": [],
-    "cpuFlavorPriority": "availability",
     "dataCenterIds": [
         "US-TX-4",
         "US-IL-1",
@@ -65,7 +63,7 @@ create_gpu_pod_api() {
     "minRAMPerGPU": 8,
     "minUploadMbps": 123,
     "minVCPUPerGPU": 2,
-    "name": "dev-pod",
+    "name": "dev-pod-gpu",
     "ports": [
         "8888/http,22/tcp"
     ],
