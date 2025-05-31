@@ -3,12 +3,11 @@
 # Ensure gopass is installed and configured to retrieve the API key
 
 create_cpu_pod_api() {
-
-    curl --request POST \
-    --url https://rest.runpod.io/v1/pods \
-    --header "Authorization: Bearer $(gopass show -o cloud/runpod/api)" \
-    --header 'Content-Type: application/json' \
-    --data '{
+    request_cmd=("curl" "--request" "POST")
+    request_cmd+=("--url" "https://rest.runpod.io/v1/pods")
+    request_cmd+=("--header" "Authorization: Bearer $(gopass show -o cloud/runpod/api)")
+    request_cmd+=("--header" "Content-Type: application/json")
+    payload='{
     "allowedCudaVersions": [],
     "cloudType": "COMMUNITY",
     "computeType": "CPU",
@@ -68,6 +67,10 @@ create_cpu_pod_api() {
     "volumeInGb": 20,
     "volumeMountPath": "/workspace"
     }'
+    request_cmd+=("--data" "$payload")
+
+    # Execute the request
+    "${request_cmd[@]}"
 }
 
 # Check if the script is being run directly (not sourced)
