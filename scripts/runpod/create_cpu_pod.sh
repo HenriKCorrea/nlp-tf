@@ -50,7 +50,8 @@ create_cpu_pod_api() {
     "dockerEntrypoint": [],
     "dockerStartCmd": [],
     "env": {
-        "ENV_VAR": "value"
+        "S3_ENDPOINT": "https://nlp-tf.sfo3.digitaloceanspaces.com",
+        "S3_TOKEN": "{{ RUNPOD_SECRET_S3_TOKEN }}"
     },
     "globalNetworking": true,
     "imageName": "runpod/base:0.5.1-cpu",

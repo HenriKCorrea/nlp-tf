@@ -12,7 +12,7 @@ create_gpu_pod_api() {
     "allowedCudaVersions": [],
     "cloudType": "COMMUNITY",
     "computeType": "GPU",
-    "containerDiskInGb": 500,
+    "containerDiskInGb": 300,
     "countryCodes": [],
     "dataCenterIds": [
         "US-TX-4",
@@ -46,8 +46,9 @@ create_gpu_pod_api() {
     "dockerEntrypoint": [],
     "dockerStartCmd": [],
     "env": {
-        "ENV_VAR": "value",
-        "JUPYTER_PASSWORD": "{{ RUNPOD_SECRET_jupyter }}"
+        "JUPYTER_PASSWORD": "{{ RUNPOD_SECRET_jupyter }}",
+        "S3_ENDPOINT": "https://nlp-tf.sfo3.digitaloceanspaces.com",
+        "S3_TOKEN": "{{ RUNPOD_SECRET_S3_TOKEN }}"
     },
     "globalNetworking": true,
     "gpuCount": 1,
