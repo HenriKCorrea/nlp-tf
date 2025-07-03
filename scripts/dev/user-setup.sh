@@ -7,7 +7,7 @@ set -euo pipefail
 cd "$HOME" || exit
 
 # Set environment variables (Default is ~/.cache/huggingface' >> ~/.bashrc)
-echo 'export HF_HOME="/workspace/.cache/huggingface"' >> "$HOME/.bashrc"
+# echo 'export HF_HOME="/workspace/.cache/huggingface"' >> "$HOME/.bashrc"
 
 # Install Miniconda for user if not already installed
 if [ ! -d "$HOME/miniconda3" ]; then
