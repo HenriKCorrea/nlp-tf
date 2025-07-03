@@ -12,7 +12,7 @@ create_gpu_pod_api() {
     "allowedCudaVersions": [],
     "cloudType": "COMMUNITY",
     "computeType": "GPU",
-    "containerDiskInGb": 500,
+    "containerDiskInGb": 400,
     "countryCodes": [],
     "dataCenterIds": [
         "US-TX-4",
@@ -73,9 +73,12 @@ create_gpu_pod_api() {
     ],
     "supportPublicIp": true,
     "vcpuCount": 2,
-    "volumeInGb": 20,
     "volumeMountPath": "/workspace"
     }'
+    add_network_volume=("jq"
+    "--arg" "argVol" "qr4i713zwa"
+    '. + {"networkVolumeId": $argVol}')
+    payload="$(echo "$payload" | "${add_network_volume[@]}")"
     request_cmd+=("--data" "$payload")
 
     # Execute the request

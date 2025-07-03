@@ -12,7 +12,7 @@ create_cpu_pod_api() {
     "allowedCudaVersions": [],
     "cloudType": "COMMUNITY",
     "computeType": "CPU",
-    "containerDiskInGb": 5,
+    "containerDiskInGb": 20,
     "countryCodes": [],
     "cpuFlavorIds": [
         "cpu3c"
@@ -69,9 +69,12 @@ create_cpu_pod_api() {
     ],
     "supportPublicIp": true,
     "vcpuCount": 2,
-    "volumeInGb": 20,
     "volumeMountPath": "/workspace"
     }'
+    add_network_volume=("jq"
+    "--arg" "argVol" "qr4i713zwa"
+    '. + {"networkVolumeId": $argVol}')
+    payload="$(echo "$payload" | "${add_network_volume[@]}")"
     request_cmd+=("--data" "$payload")
 
     # Execute the request
