@@ -3,6 +3,20 @@
 # Ensure gopass is installed and configured to retrieve the API key
 # See https://docs.runpod.io/api-reference/pods/POST/pods
 
+_pick_network_volume_id() {
+
+  request_cmd=("curl" "--request" "GET")
+  request_cmd+=("--url" "https://rest.runpod.io/v1/networkvolumes")
+  request_cmd+=("--header" "Authorization: Bearer $(gopass show -o cloud/runpod/api)")
+
+  parse_cmd=("jq" "-r")
+  parse_cmd+=('if type=="array" then .[0].id else null end')
+
+  # Execute the request and parse the output
+  "${request_cmd[@]}" | "${parse_cmd[@]}"
+}
+
+
 create_gpu_pod_api() {
     request_cmd=("curl" "--request" "POST")
     request_cmd+=("--url" "https://rest.runpod.io/v1/pods")
@@ -75,10 +89,13 @@ create_gpu_pod_api() {
     "vcpuCount": 2,
     "volumeMountPath": "/workspace"
     }'
-    add_network_volume=("jq"
-    "--arg" "argVol" "qr4i713zwa"
-    '. + {"networkVolumeId": $argVol}')
-    payload="$(echo "$payload" | "${add_network_volume[@]}")"
+    networkVolume="$(_pick_network_volume_id)"
+    if [[ "$networkVolume" != "null" ]]; then
+        add_network_volume=("jq"
+        "--arg" "argVol" "$networkVolume"
+        '. + {"networkVolumeId": $argVol}')
+        payload="$(echo "$payload" | "${add_network_volume[@]}")"
+    fi
     request_cmd+=("--data" "$payload")
 
     # Execute the request
