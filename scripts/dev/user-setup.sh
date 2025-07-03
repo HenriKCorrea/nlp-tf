@@ -6,11 +6,12 @@ set -euo pipefail
 # Navigate to user home directory
 cd "$HOME" || exit
 
-# Set environment variables
-echo 'export HF_HOME="/workspace/.cache/huggingface"  # Default is ~/.cache/huggingface' >> ~/.bashrc 
+# Set environment variables (Default is ~/.cache/huggingface' >> ~/.bashrc)
+echo 'export HF_HOME="/workspace/.cache/huggingface"' >> "$HOME/.bashrc"
 
 # Install Miniconda for user if not already installed
 if [ ! -d "$HOME/miniconda3" ]; then
+    mkdir -p "$HOME/miniconda3"
     wget -q https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O "$HOME/miniconda3/miniconda.sh"
     bash "$HOME/miniconda3/miniconda.sh" -b -u -p "$HOME/miniconda3"
     rm "$HOME/miniconda3/miniconda.sh"
@@ -24,12 +25,5 @@ if [ ! -d "nlp-tf" ]; then
     git clone https://github.com/henrikcorrea/nlp-tf.git
 fi
 
-# Navigate to the cloned repository
-cd nlp-tf || exit
-
-# Install Python dependencies using miniconda
-if [ -f "requirement.txt" ]; then
-    conda create -y -n nlp-tf-env python=3.9
-    conda activate nlp-tf-env
-    pip install -r requirement.txt
-fi
+# Reminder to set git credentials
+echo "Please set your git credentials using 'git config --global user.name \"Your Name\"
