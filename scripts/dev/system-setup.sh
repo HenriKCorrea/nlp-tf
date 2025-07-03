@@ -8,7 +8,9 @@ apt-get update && apt-get install -y --no-install-recommends \
     vim \
     nano \
     rsync \
-    wget
+    wget \
+    htop \
+    direnv
 
 # Create a new user with sudo privileges
 adduser --disabled-password --gecos "" developer
