@@ -7,7 +7,7 @@ _generate_payload_template() {
     cat <<EOF
 {
     "allowedCudaVersions": [],
-    "cloudType": "COMMUNITY",
+    "cloudType": "SECURE",
     "computeType": "CPU",
     "containerDiskInGb": 20,
     "countryCodes": [],
