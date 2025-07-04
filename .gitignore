@@ -172,3 +172,8 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Local notebook dataset cache directory
+#  This is used by the `datasets` library to cache downloaded datasets.
+#  It is recommended to not include this in version control.
+notebooks/cache/
