@@ -26,4 +26,4 @@ if [ ! -d "nlp-tf" ]; then
 fi
 
 # Reminder to set git credentials
-echo "Please set your git credentials using 'git config --global user.name \"Your Name\"
+echo "Please set your git credentials using 'git config --global user.name \"Your Name\""
