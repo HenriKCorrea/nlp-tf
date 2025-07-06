@@ -10,7 +10,8 @@ apt-get update && apt-get install -y --no-install-recommends \
     rsync \
     wget \
     htop \
-    direnv
+    direnv \
+    tmux
 
 # Create a new user with sudo privileges
 adduser --disabled-password --gecos "" developer
