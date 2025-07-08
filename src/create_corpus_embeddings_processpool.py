@@ -11,7 +11,6 @@ import omegaconf
 import collections
 import os
 import re
-import gc
 from pathlib import Path
 from typing import Any
 from collections import OrderedDict
@@ -110,10 +109,6 @@ def setup_model_on_device(device: str) -> tuple[DPRContextEncoder, GPT2Tokenizer
     )
     ctx_encoder = ctx_encoder.to(device).eval()
 
-    # Compile for optimization
-    if hasattr(torch, "compile"):
-        ctx_encoder = torch.compile(ctx_encoder, mode="default")
-
     # Initialize tokenizer
     tokenizer: GPT2TokenizerFast = AutoTokenizer.from_pretrained(
         pretrained_model_name, config=encoder_config
@@ -138,7 +133,6 @@ def process_shard_on_gpu(gpu_id: int, shard: Dataset) -> Dataset:
     # Set device for this process
     deviceType = "cuda" if torch.cuda.is_available() else "cpu"
     device = f"{deviceType}:{gpu_id}"
-    torch.cuda.set_device(gpu_id)
     
     # Load model on this specific GPU
     ctx_encoder_gpu, tokenizer_gpu = setup_model_on_device(device)
@@ -154,11 +148,14 @@ def process_shard_on_gpu(gpu_id: int, shard: Dataset) -> Dataset:
         )
         inputs = {k: v.to(device, non_blocking=True) for k, v in inputs.items()}
 
-        # TODO: Check performance if using float32 instead of bfloat16
         # bfloat16 is more memory efficient on GPUs like RTX 3090
-        # but may have lower precision than float32
-        with torch.no_grad(), torch.amp.autocast(device_type=deviceType, dtype=torch.float32, enabled=True):
+        # but has a lower precision than float32
+        # bfloat16: 16 bits, 1 sign bit, 8 exponent bits, 7 mantissa bits
+        # float16: 16 bits, 1 sign bit, 5 exponent bits, 10 mantissa bits
+        # float32: 32 bits, 1 sign bit, 8 exponent bits, 23 mantissa bits
+        with torch.no_grad(), torch.amp.autocast(device_type=deviceType, dtype=torch.bfloat16):
             embeddings = ctx_encoder_gpu(**inputs).pooler_output
+            # torch.cuda.synchronize()
             embeddings_cpu = embeddings.detach().cpu().to(torch.float32).tolist()
             return {"embedding": embeddings_cpu}
     
@@ -192,9 +189,9 @@ def process_with_processpool(corpus: Dataset):
     num_gpus = torch.cuda.device_count()
     print(f"Found {num_gpus} GPUs available")
     
-    if num_gpus < 2:
-        raise RuntimeError("At least 2 GPUs are required for this operation.")
-    
+    if num_gpus < 1:
+        raise RuntimeError("At least one GPU is required for this operation.")
+
     # Calculate shard sizes
     total_docs = len(corpus)
     docs_per_gpu = total_docs // num_gpus
@@ -295,7 +292,7 @@ if corpus_with_embeddings is None:
     )
     
     # Generate embeddings
-    corpus_with_embeddings = process_with_processpool(corpus)  # Limit to first 1000 documents for testing
+    corpus_with_embeddings = process_with_processpool(corpus)
     
     print("Embeddings generated successfully!")
     print(f"Saving corpus cache to {CORPUS_CACHE_DIR}")
