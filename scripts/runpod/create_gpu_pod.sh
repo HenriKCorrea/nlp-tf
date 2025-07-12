@@ -4,7 +4,7 @@
 # See https://docs.runpod.io/api-reference/pods/POST/pods
 
 # cloudType: SECURE | COMMUNITY
-# gpuTypeIds: [ "NVIDIA RTX A4000", "NVIDIA RTX 3090" ]
+# gpuTypeIds: [ "NVIDIA RTX A4000", "NVIDIA GeForce RTX 3090" ]
 
 _generate_payload_template() {
     cat <<EOF
@@ -20,10 +20,10 @@ _generate_payload_template() {
     },
     "cloudType": "COMMUNITY",
     "volumeInGb": 1,
-    "containerDiskInGb": 300,
-    "gpuCount": 5,
+    "containerDiskInGb": 400,
+    "gpuCount": 4,
     "gpuTypeIds": [
-        "NVIDIA RTX A4000"
+        "NVIDIA GeForce RTX 3090"
     ],
     "interruptible": false
 }
