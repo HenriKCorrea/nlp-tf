@@ -1,0 +1,122 @@
+\documentclass[12pt]{article}
+
+\usepackage{packages/sbc/sbc-template}
+\usepackage{graphicx,url}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+
+\sloppy
+
+\title{Code retrieval task analysis}
+
+\author{Henrique Krausbug Correa\inst{1}, Viviane Pereira Moreira\inst{1}, Dennis Giovani Balreira\inst{1}}
+
+
+\address{Instituto de Informática -- Universidade Federal do Rio Grande do Sul
+  (UFRGS)\\
+  Caixa Postal 15.064 -- 91.501-970 -- Porto Alegre -- RS -- Brazil
+  \email{\{henrique,viviane,dgbalreira\}@inf.ufrgs.br}
+}
+
+\begin{document} 
+
+\maketitle
+
+\begin{abstract}
+  This meta-paper describes the style to be used in articles and short papers
+  for SBC conferences. For papers in English, you should add just an abstract
+  while for the papers in Portuguese, we also ask for an abstract in
+  Portuguese (``resumo''). In both cases, abstracts should not have more than
+  10 lines and must be in the first page of the paper.
+\end{abstract}
+     
+\begin{resumo} 
+  Este meta-artigo descreve o estilo a ser usado na confecção de artigos e
+  resumos de artigos para publicação nos anais das conferências organizadas
+  pela SBC. É solicitada a escrita de resumo e abstract apenas para os artigos
+  escritos em português. Artigos em inglês deverão apresentar apenas abstract.
+  Nos dois casos, o autor deve tomar cuidado para que o resumo (e o abstract)
+  não ultrapassem 10 linhas cada, sendo que ambos devem estar na primeira
+  página do artigo.
+\end{resumo}
+
+\section{Introduction}
+% (1 page)
+
+%     Motivation: Why is code retrieval important in NLP? What is XCodeEval’s role?
+
+%     Objective: Reproduce DPR-based retrieval results for NL-Code and Code-Code tasks.
+
+%     Challenge: Computational constraints and time limitations.
+
+
+\section{Background \& Related Work}
+
+% (1–1.5 pages)
+
+%     Dense Passage Retrieval (DPR): How it works, why it’s used for code retrieval.
+
+%     XCodeEval Benchmark: Tasks, dataset structure, and original paper’s setup.
+
+%     Prior Work: Summarize key papers on code retrieval (e.g., CodeBERT, UniXcoder).
+
+\section{Methodology}
+
+%  (2–3 pages)
+
+%     Data Preparation: How you processed XCodeEval (NL-Code template, corpus format).
+
+%     Model Setup:
+
+%         DPR architecture (query/corpus encoders, multilingual training).
+
+%         Hyperparameter (batch size, seq length, epochs) from the original paper.
+
+%     Evaluation Plan: Top-*k* accuracy (*k*=100), corpus/query embedding generation.
+
+\section{Implementation Challenges}
+
+% (1.5–2 pages) (Key section if results are incomplete)
+
+%     Computational Limits: Embedding generation time, hardware constraints.
+
+%     Debugging: Issues with Hugging Face/DPR libraries, sequence length handling.
+
+%     Partial Results: Any intermediate outputs (e.g., corpus embeddings for a subset).
+
+\section{Results \& Analysis}
+
+% (1–2 pages)
+
+%     Expected vs. Actual: Compare original paper’s metrics to your observations.
+
+%     Possible Reasons for Divergence:
+
+%         Training time insufficient? Hyperparameters not optimized?
+
+%         Data preprocessing differences (e.g., template formatting).
+
+%     Qualitative Examples: Show some query-corpus pairs (even if not evaluated fully).
+
+\section{Discussion \& Future Work}
+
+% (1 page)
+
+%     Lessons Learned: What would you do differently with more time/resources?
+
+%     Alternative Approaches: Smaller models (e.g., ColBERT), approximate nearest-neighbor search (FAISS).
+
+%     Broader Implications: Reproducibility challenges in NLP research.
+
+\section{Conclusion}
+
+% (0.5 page)
+
+%     Summary of efforts, challenges, and open questions.
+
+
+\bibliographystyle{packages/sbc/sbc}
+\bibliography{packages/sbc/sbc-template}
+
+\end{document}
