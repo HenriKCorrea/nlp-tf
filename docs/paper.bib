@@ -83,3 +83,48 @@
   primaryclass  = {cs.CL},
   url           = {https://arxiv.org/abs/2211.15533}
 }
+
+@phdthesis{Kim2021,
+  author       = {KIM, Kisub},
+  title        = {Steps Towards Semantic Code Search},
+  language     = {English},
+  year         = {07 July 2021},
+  school       = {Unilu - University of Luxembourg, Luxembourg, Luxembourg},
+  abstract     = {Code search can be a core activity in software development for enhancing productivity. Developers commonly reuse existing source code fragments by searching for codebases available in local or global repositories. Code search helps developers ease the implementation by supplying code snippets to reuse or understand specific concepts deeper during software development by providing various code snippets for the same tasks. In addition, reading real-world examples (the results of code search) is helpful for developers to make programs more reliable, faster, or secure as the examples have been tested and reused by many other developers. However, it is getting more challenging as the codebases are becoming larger since the large codebase can derive too many code candidates. Thus, the research community has invested substantial efforts in developing new techniques, combining methods, and applying more extensive data to improve the performance and efficiency of code search.
+                  
+                  Despite the significant efforts made by researchers in the field, code search still has many open problems that the community needs to address, such as lack of benchmarks, vocabulary mismatch (between natural language and source code), and low extensibility on programming languages. Our work focuses on the open issues and the momentum of the domain on semantic code search, which considers the meaning of the user query rather than concerning the syntactic similarity that most other studies have approached. 
+                  The thesis begins with exploring general issues on code search by conducting a systematic literature review. The survey organizes and classifies the code search approaches with various directions such as learning-based, feedback-driven, dynamic techniques. It reveals insights and new research directions. Given the research directions by the survey, we concentrate on alleviating the vocabulary mismatch problem between free-form text query and source code to improve the overall performance of code search first. 
+                  To understand the free-form text query, we leverage crowd knowledge. 
+                  The survey also discovered that there are only a few code-to-code approaches and investigation on crowd-knowledge indicated there exists demand, especially on finding semantically similar source code, i.e., source code that is syntactically different but performs the same functionality. Therefore, we go further, reformulating the user code query with real-world code snippets. This allows catching the semantics from the source code. Given the semantic information, a user can search for desired source code by using their code fragments. 
+                  
+                  In this context, the present dissertation aims to explore semantic code search by contributing to the following three building blocks:
+                  
+                  Review of state-of-the-art: Despite the growing interest in code search, a comprehensive survey or systematic literature review on the field of code search remains limited. We conducted a large-scale systematic literature review on the internet-scale code search. Our objective in this study was to devise a grounded approach to understand the procedure for the code search approach. We built an operational taxonomy on top of each procedure to categorize the approaches and provide insights on the selection of various approaches. Our investigation on the open issues from the literature guide researchers and practitioners to future research directions.
+                  
+                  CoCaBu: Source code terms such as method names and variable types are often different from conceptual words mentioned in a search query. This vocabulary mismatch problem can make code search inefficient. We presented COde voCABUlary (CoCaBu), an approach to resolving the vocabulary mismatch problem when dealing with free-form code search queries. Our approach leverages common developer questions and the associated expert answers to augment user queries with the relevant but missing structural code entities to improve matching relevant code examples within large code repositories. To instantiate this approach, we built GitSearch, a code search engine, on top of GitHub and Stack Overflow Q&A data. Experimental results, collected via several comparisons against the state-of-the-art code search and existing online search engines such as Google, show that CoCaBu provides qualitatively better results. Furthermore, our live study on the developer community indicates that it can retrieve acceptable or attractive answers for their questions.
+                  
+                  FaCoY: Most existing approaches focus on serving user queries provided as natural language free-form input. However, there exists a wide range of use-case scenarios where a code-to-code approach would be most beneficial. For example, research directions in code transplantation, code diversity, patch recommendation can leverage a code-to-code search engine to find essential ingredients for their techniques. Given the wide range of use-case for code-to-code search, we propose FaCoY, a novel approach for statically finding code snippets that may be semantically similar to user input code. FaCoY implements a query alternation strategy: instead of directly matching code query tokens with code in the search space, FaCoY first attempts to identify other tokens, which may also be relevant in implementing the functional behavior of the input code. The experimental results show that FaCoY is more effective than all the existing online code-to-code search engines, and it can also be used to find semantic code clones (i.e., Type-4). Moreover, the results proved that FaCoY could be helpful in code/patch recommendation.},
+  organization = {FNR - Fonds National de la Recherche}
+}
+
+@misc{Johnson2017,
+  title         = {Billion-scale similarity search with GPUs},
+  author        = {Jeff Johnson and Matthijs Douze and Hervé Jégou},
+  year          = {2017},
+  eprint        = {1702.08734},
+  archiveprefix = {arXiv},
+  primaryclass  = {cs.CV},
+  url           = {https://arxiv.org/abs/1702.08734}
+}
+
+@ARTICLE{Choi2021,
+  author={Choi, Donghyun and Shin, Myeongcheol and Kim, Eunggyun and Shin, Dong Ryeol},
+  journal={IEEE Access}, 
+  title={Adaptive Batch Scheduling for Open-Domain Question Answering}, 
+  year={2021},
+  volume={9},
+  number={},
+  pages={112097-112103},
+  keywords={Training;Knowledge discovery;Adaptive scheduling;Task analysis;Internet;Encoding;Benchmark testing;Open-domain question answering;dense passage retrieval;batch scheduling},
+  doi={10.1109/ACCESS.2021.3103963}}
+

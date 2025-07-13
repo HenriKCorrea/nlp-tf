@@ -128,9 +128,72 @@ Section 6 concludes with findings and future directions.
 
 % Terminilogy: Define key terms (e.g., code retrieval, dense passage retrieval).
 
+% Dense Passage Retrieval (DPR): How it works, why it’s used for code retrieval.
+
+\subsection{Code Retrieval}
+
+Code retrieval is the process of searching and retrieving relevant code snippets or implementations based on user queries, which can be in natural language or code form. This task is crucial for various applications, including code completion, bug fixing, and documentation generation. The challenge lies in effectively matching user intent with the correct code implementations, especially across multiple programming languages ~\cite{Kim2021}.
+
+The essential components of a code retrieval system are illustrated in Figure~\ref{fig:code-search-components} and summarized below:
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.7\textwidth]{images/code-search-components.png}
+\caption{Basic Code Search Components from \cite{Kim2021}}
+\label{fig:code-search-components}
+\end{figure}
+
+\begin{itemize}
+    \item \textbf{Search Database}: Defines the source code repository or dataset from which code is retrieved. This may involve web crawlers to collect code files, API documentation, or Q\&A pairs. The search base can be structured as a relational database, file system, or plain text corpus, depending on the application.
+    \item \textbf{Indexer}: Optimizes data access by building efficient data structures for retrieval. Common techniques include inverted indexing (mapping terms to document locations), as well as B+ trees, graph-based, or positional indexing, all aimed at speeding up code snippet retrieval.
+    \item \textbf{Retrieval Model}: The core of the system, responsible for matching user queries to relevant code. Retrieval models can be based on text matching, matrix computations, or vector similarity measures, and are often the main differentiator between code search approaches.
+    \item \textbf{User Interface}: Presents retrieval results to users, either through standalone search engines or integration with development environments (IDEs). The interface must accommodate diverse user needs and workflows.
+\end{itemize}
+
+\subsection{Dense Passage Retrieval (DPR)}
+
+Dense Passage Retrieval (DPR)~\cite{Karpukhin2020} is a neural retrieval framework originally developed for open-domain question answering, but now widely adopted for code and document retrieval tasks. DPR is built on a bi-encoder architecture, where two separate encoders independently map queries and passages (or code snippets) into a shared dense vector space. This enables efficient retrieval by comparing vector representations using simple similarity measures, such as the dot product.
+
+Figure~\ref{fig:dpr-architecture} illustrates the main workflow of DPR, which involves two stages:
+\begin{itemize}
+    \item \textbf{Indexing}: All candidate passages (or code snippets) are encoded into dense vectors using a passage encoder. These vectors are stored in an efficient similarity search index, such as FAISS~\cite{Johnson2017}, allowing for rapid retrieval even from very large collections.
+    \item \textbf{Retrieval}: At query time, the input question or natural language description is encoded by a separate query encoder. The system then retrieves the top-$k$ passages whose vectors are most similar to the query vector.
+\end{itemize}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=1.0\textwidth]{images/dpr-architecture-gray.png}
+\caption{DPR Architecture conceptual overview}
+\label{fig:dpr-architecture}
+\end{figure}
+
+A key advantage of DPR is that both encoders are trained to maximize the similarity between relevant query-passage pairs while minimizing it for irrelevant pairs. The last technique is called in-batch negative sampling \cite{Choi2021}, where negative examples are drawn from the same batch during training.
+
+For code retrieval, DPR's architecture is particularly effective because it can learn to bridge the gap between natural language queries and code implementations, even across multiple programming languages. By leveraging dense vector representations, DPR supports semantic search, enabling retrieval of relevant code snippets that may not share surface-level keywords with the query.
+
+\section{Related Work}
+
+% (1–2 pages)
+
+% Post Work: Summarize key papers on code retrieval that cite XCodeEval and criticize its limitations.
+
+\section{Methodology}
+
+%  (2–3 pages)
+
+% Describe your approach to reproducing the XCodeEval benchmark.
+
 % XCodeEval Benchmark: Tasks, dataset structure, and original paper’s setup.
 
-% Dense Passage Retrieval (DPR): How it works, why it’s used for code retrieval.
+% Data Preparation: How you processed XCodeEval (NL-Code template, corpus format).
+
+% Model Setup:
+
+%   DPR architecture (query/corpus encoders, multilingual training).
+
+%   Hyperparameter (batch size, seq length, epochs) from the original paper.
+
+% Evaluation Plan: Top-*k* accuracy (*k*=100), corpus/query embedding generation.
 
 XCodeEval Benchmark
 
@@ -147,27 +210,6 @@ The XCodeEval benchmark is designed to evaluate neural retrieval models in the c
 \end{figure}
 
 
-\section{Related Work}
-
-% (1–2 pages)
-
-% Post Work: Summarize key papers on code retrieval that cite XCodeEval and criticize its limitations.
-
-\section{Methodology}
-
-%  (2–3 pages)
-
-% Describe your approach to reproducing the XCodeEval benchmark.
-
-% Data Preparation: How you processed XCodeEval (NL-Code template, corpus format).
-
-% Model Setup:
-
-%   DPR architecture (query/corpus encoders, multilingual training).
-
-%   Hyperparameter (batch size, seq length, epochs) from the original paper.
-
-% Evaluation Plan: Top-*k* accuracy (*k*=100), corpus/query embedding generation.
 
 \section{Experimental Results}
 
